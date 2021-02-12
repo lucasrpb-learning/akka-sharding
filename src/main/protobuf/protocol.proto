@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+//#options
+option java_multiple_files = true;
+option java_package = "sharding.grpc";
+option java_outer_classname = "GreeterService";
+
+package sharding.grpc;
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloResponse {
+  string msg = 1;
+}
+
