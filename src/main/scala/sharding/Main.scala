@@ -19,23 +19,14 @@ object Main {
   object RootBehavior {
     def apply(port: Int): Behavior[Nothing] = Behaviors.setup[Nothing] { context =>
       // Create an actor that handles cluster domain events
-      //context.spawn(ClusterListener(), "ClusterListener")
+      context.spawn(ClusterListener(), "ClusterListener")
 
       val sharding = ClusterSharding(context.system)
 
-      val ref = sharding.init(
+      sharding.init(
         Entity(TypeKey)(createBehavior = entityContext =>
           Greeter(entityContext.entityId, entityContext))
       )
-
-      val ref2 = sharding.entityRefFor(TypeKey, "Luana")
-
-      ref2.ask { actor =>
-        Greeter.Greet("Luana", actor)
-      }.onComplete {
-        case Success(res) => println(s"\nresponse: ${res}\n")
-        case Failure(ex) => ex.printStackTrace()
-      }
 
       new GreeterServer(context.system, sharding).run(port + 1000)
 
