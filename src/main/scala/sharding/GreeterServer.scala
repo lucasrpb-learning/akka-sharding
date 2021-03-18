@@ -3,32 +3,15 @@ package sharding
 //#import
 
 
-import java.security.KeyStore
-import java.security.SecureRandom
-import java.security.cert.Certificate
-import java.security.cert.CertificateFactory
-import scala.io.Source
-import akka.actor.typed.{ActorRef, ActorSystem}
-import akka.actor.typed.scaladsl.Behaviors
-import akka.cluster.sharding.typed.ShardingEnvelope
+import akka.actor.typed.ActorSystem
 import akka.cluster.sharding.typed.scaladsl.ClusterSharding
-import akka.http.scaladsl.ConnectionContext
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.HttpsConnectionContext
-import akka.http.scaladsl.model.HttpRequest
-import akka.http.scaladsl.model.HttpResponse
-import akka.pki.pem.DERPrivateKeyLoader
-import akka.pki.pem.PEMDecoder
-import com.typesafe.config.ConfigFactory
+import akka.http.scaladsl.model.{HttpRequest, HttpResponse}
 import sharding.grpc.GreeterServiceHandler
 
-import javax.net.ssl.KeyManagerFactory
-import javax.net.ssl.SSLContext
-import scala.concurrent.ExecutionContext
-import scala.concurrent.Future
-import scala.util.Failure
-import scala.util.Success
+import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.duration._
+import scala.util.{Failure, Success}
 //#import
 
 
@@ -47,6 +30,7 @@ import scala.concurrent.duration._
 class GreeterServer(system: ActorSystem[_], sharding: ClusterSharding) {
 
   def run(port: Int): Future[Http.ServerBinding] = {
+
     implicit val sys = system
     implicit val ec: ExecutionContext = system.executionContext
 

@@ -1,8 +1,6 @@
 package sharding
 
-import akka.actor.typed.scaladsl.AskPattern.Askable
-import akka.actor.typed.{ActorRef, ActorSystem}
-import akka.cluster.sharding.typed.ShardingEnvelope
+import akka.actor.typed.{ActorRefResolver, ActorSystem}
 import akka.cluster.sharding.typed.scaladsl.ClusterSharding
 import akka.util.Timeout
 import sharding.grpc._
@@ -16,6 +14,8 @@ class GreeterServiceImpl(sys: ActorSystem[_], sharding: ClusterSharding)
   implicit val timeout = Timeout(3 seconds)
   implicit val scheduler = sys.scheduler
 
+  val actorRefResolver = ActorRefResolver(sys)
+
   override def sayHello(req: HelloRequest): Future[HelloResponse] = {
 
     println(s"${Console.GREEN_B}RECEIVED REQUEST: ${req}${Console.RESET}")
@@ -25,7 +25,8 @@ class GreeterServiceImpl(sys: ActorSystem[_], sharding: ClusterSharding)
     val ref = sharding.entityRefFor(Main.TypeKey, req.name)
 
     ref.ask { actor =>
-      Greeter.Greet(req.name, actor)
+      //Greeter.Greet(req.name, actor)
+      req.withActorRef(actorRefResolver.toSerializationFormat(actor))
     }
   }
 }

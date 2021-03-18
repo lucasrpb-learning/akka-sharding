@@ -1,25 +1,29 @@
 package sharding
 
 import akka.actor.typed.scaladsl.Behaviors
-import akka.actor.typed.{ActorRef, Behavior}
+import akka.actor.typed.{ActorRef, ActorRefResolver, Behavior}
 import akka.cluster.sharding.typed.scaladsl.EntityContext
-import sharding.grpc.HelloResponse
+import sharding.grpc._
 
 object Greeter {
 
-  sealed trait Command
+  //sealed trait Command extends CborSerializable
+  //final case class Greet(name: String, replyTo: ActorRef[HelloResponse]) extends Command
 
-  final case class Greet(name: String, replyTo: ActorRef[HelloResponse]) extends Command
+  def apply(entityId: String, ectx: EntityContext[Command]) =
+    Behaviors.setup[Command] { ctx =>
 
-  def apply(entityId: String, ectx: EntityContext[Command]) = Behaviors.setup[Greeter.Command] { ctx =>
+      val actorRefResolver = ActorRefResolver(ctx.system)
 
-    Behaviors.receiveMessage[Command] {
-      case Greet(name, replyTo) =>
+      Behaviors.receiveMessage[Command] {
+        case HelloRequest(name, actorRef, _) =>
 
-        replyTo ! HelloResponse(s"Hello, ${name} from shard ${ectx.shard}!")
+          val replyTo = actorRefResolver.resolveActorRef[HelloResponse](actorRef)
 
-        Behaviors.same
-    }
+          replyTo ! HelloResponse(s"Hello, ${name} from shard ${ectx.shard}!")
+
+          Behaviors.same
+      }
   }
 
 }

@@ -13,7 +13,7 @@ import scala.util.{Failure, Success}
 
 object Main {
 
-  val TypeKey = EntityTypeKey[Greeter.Command]("Greeter")
+  val TypeKey = EntityTypeKey[sharding.grpc.Command]("Greeter")
   implicit val timeout = Timeout(5 seconds)
 
   object RootBehavior {

@@ -16,7 +16,6 @@ lazy val akkaVersion = "2.6.12"
 lazy val akkaHttpVersion = "10.2.3"
 lazy val akkaGrpcVersion = "1.1.0"
 
-
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.2.3" % Test,
 
@@ -32,7 +31,17 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor-typed" % akkaVersion,
   "com.typesafe.akka" %% "akka-stream" % akkaVersion,
   "com.typesafe.akka" %% "akka-discovery" % akkaVersion,
-  "com.typesafe.akka" %% "akka-pki" % akkaVersion
+  "com.typesafe.akka" %% "akka-pki" % akkaVersion,
+
+  "io.grpc" % "grpc-netty" % "1.36.0",
+
+  //"com.thesamet.scalapb" %% "compilerplugin" % "0.10.10",
+
+  "com.typesafe.akka" %% "akka-serialization-jackson" % AkkaVersion
 )
+
+/*Compile / PB.targets := Seq(
+  scalapb.gen() -> (Compile / sourceManaged).value / "scalapb"
+)*/
 
 enablePlugins(AkkaGrpcPlugin)

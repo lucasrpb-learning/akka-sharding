@@ -10,6 +10,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../src/test/scala" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../src/main/protobuf" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../target/scala-2.12/akka-grpc/main" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../target/scala-2.12/src_managed/main" isTestSource="false" generated="true" />
       <excludeFolder url="file://$MODULE_DIR$/../../target" />
       <excludeFolder url="file://$MODULE_DIR$/../../target/bg-jobs" />
       <excludeFolder url="file://$MODULE_DIR$/../../target/global-logging" />
@@ -21,6 +22,15 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="sbt: ch.qos.logback:logback-classic:1.2.3:jar" level="project" />
     <orderEntry type="library" name="sbt: ch.qos.logback:logback-core:1.2.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.core:jackson-annotations:2.10.5:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.core:jackson-core:2.10.5:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.core:jackson-databind:2.10.5.1:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.10.5:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.10.5:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.10.5:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.module:jackson-module-parameter-names:2.10.5:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.module:jackson-module-paranamer:2.10.5:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.module:jackson-module-scala_2.12:2.10.5:jar" level="project" />
     <orderEntry type="library" name="sbt: com.github.jnr:jffi:1.2.18:jar" level="project" />
     <orderEntry type="library" name="sbt: com.github.jnr:jffi:1.2.18:native:jar" level="project" />
     <orderEntry type="library" name="sbt: com.github.jnr:jnr-a64asm:1.0.0:jar" level="project" />
@@ -43,6 +53,7 @@
     <orderEntry type="library" name="sbt: com.lihaoyi:sourcecode_2.12:0.2.1:jar" level="project" />
     <orderEntry type="library" name="sbt: com.thesamet.scalapb:lenses_2.12:0.10.11:jar" level="project" />
     <orderEntry type="library" name="sbt: com.thesamet.scalapb:scalapb-runtime_2.12:0.10.11:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.thoughtworks.paranamer:paranamer:2.8:jar" level="project" />
     <orderEntry type="library" name="sbt: com.twitter:hpack:1.0.2:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.akka:akka-actor-typed_2.12:2.6.12:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.akka:akka-actor_2.12:2.6.12:jar" level="project" />
@@ -62,20 +73,33 @@
     <orderEntry type="library" name="sbt: com.typesafe.akka:akka-pki_2.12:2.6.12:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.akka:akka-protobuf-v3_2.12:2.6.12:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.akka:akka-remote_2.12:2.6.12:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.typesafe.akka:akka-serialization-jackson_2.12:2.6.12:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.akka:akka-slf4j_2.12:2.6.12:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.akka:akka-stream_2.12:2.6.12:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe:config:1.4.0:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe:ssl-config-core_2.12:0.4.2:jar" level="project" />
-    <orderEntry type="library" name="sbt: io.grpc:grpc-api:1.35.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: io.grpc:grpc-context:1.35.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: io.grpc:grpc-core:1.35.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.grpc:grpc-api:1.36.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.grpc:grpc-context:1.36.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.grpc:grpc-core:1.36.0:jar" level="project" />
     <orderEntry type="library" name="sbt: io.grpc:grpc-netty-shaded:1.35.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.grpc:grpc-netty:1.36.0:jar" level="project" />
     <orderEntry type="library" name="sbt: io.grpc:grpc-stub:1.35.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.netty:netty-buffer:4.1.52.Final:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.netty:netty-codec-http2:4.1.52.Final:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.netty:netty-codec-http:4.1.52.Final:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.netty:netty-codec-socks:4.1.52.Final:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.netty:netty-codec:4.1.52.Final:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.netty:netty-common:4.1.52.Final:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.netty:netty-handler-proxy:4.1.52.Final:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.netty:netty-handler:4.1.52.Final:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.netty:netty-resolver:4.1.52.Final:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.netty:netty-transport:4.1.52.Final:jar" level="project" />
     <orderEntry type="library" name="sbt: io.perfmark:perfmark-api:0.23.0:jar" level="project" />
     <orderEntry type="library" name="sbt: org.agrona:agrona:1.8.0:jar" level="project" />
     <orderEntry type="library" name="sbt: org.checkerframework:checker-compat-qual:2.5.5:jar" level="project" />
     <orderEntry type="library" name="sbt: org.codehaus.mojo:animal-sniffer-annotations:1.19:jar" level="project" />
     <orderEntry type="library" name="sbt: org.lmdbjava:lmdbjava:0.7.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.lz4:lz4-java:1.7.1:jar" level="project" />
     <orderEntry type="library" name="sbt: org.ow2.asm:asm-analysis:5.0.3:jar" level="project" />
     <orderEntry type="library" name="sbt: org.ow2.asm:asm-commons:5.0.3:jar" level="project" />
     <orderEntry type="library" name="sbt: org.ow2.asm:asm-tree:5.0.3:jar" level="project" />

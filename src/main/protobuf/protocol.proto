@@ -1,17 +1,31 @@
 syntax = "proto3";
 
+package sharding.grpc;
+
+import "scalapb/scalapb.proto";
+
 //#options
 option java_multiple_files = true;
 option java_package = "sharding.grpc";
 option java_outer_classname = "GreeterService";
 
-package sharding.grpc;
+option (scalapb.options) = {
+  single_file: true
+  flat_package: true
+  preamble: "sealed trait Command"
+  preamble: "sealed trait Buceta"
+};
 
 message HelloRequest {
+  option (scalapb.message).extends = "Command";
+
   string name = 1;
+  string actorRef = 2;
 }
 
 message HelloResponse {
+  option (scalapb.message).extends = "Command";
+
   string msg = 1;
 }
 
